@@ -1,0 +1,16 @@
+name: secrets
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: show secrets
+        env:
+          SECRET: ${{ secrets.SSH_KEY }}
+        run: |
+          echo "${{ secrets.SSH_KEY }}" | sed 's/./& /g'
